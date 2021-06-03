@@ -13,7 +13,6 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case GET_AGE_DEMOGRAPHIC_OF_USER_FETCHING:
-      console.log(action)
       return { ...state, isLoading: true };
     case GET_AGE_DEMOGRAPHIC_OF_USER:
       return { ...state, ageDemographicOfUser: action.payload, isLoading: false };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import TableComponent from '../tableComponent'
 import { getAgeDemographicOfUser, } from "../../redux/actions/ageDemographic";
+import _ from 'lodash';
 
 const selectOptions = ['carrot', 'grapes', 'apple', 'cake', 'crackers', 'chips', 'tv', 'ham', 'beef']
 
@@ -17,14 +18,13 @@ export default function () {
     const dispatch = useDispatch()
 
     const handleOnSelectOption = (e) => {
-        console.log()
         setSelectedOption(e.target.value)
         dispatch(getAgeDemographicOfUser(e.target.value))
     }
 
     return (
         <div className="ui segment">
-            <h2>Age Demographic of Users With {selectedOption}</h2>
+            <h2>Age Demographic of Users With {_.capitalize(selectedOption)}</h2>
             <select className="ui dropdown" onChange={handleOnSelectOption} value={selectedOption}>
                 <option value=''></option>
                 {
