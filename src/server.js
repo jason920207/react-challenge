@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 // register routes
 registerRoutes(app);
 
-app.use(express.static('public'))
+app.use(express.static('dist'))
 
 // create server start method
 const start = () => {
