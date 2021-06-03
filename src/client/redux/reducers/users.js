@@ -1,5 +1,5 @@
 import {
-  FETCHING,
+  GET_USERS_FETCHING,
   GET_USERS,
   GET_USERS_ERROR
 } from '../actions/users';
@@ -12,7 +12,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case FETCHING:
+    case GET_USERS_FETCHING:
       return { ...state, isLoading: true };
     case GET_USERS:
       return { ...state, users: action.payload, isLoading: false };

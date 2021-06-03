@@ -8,11 +8,15 @@ export default function () {
     const users = useSelector((state) => {
         return state.users.users
     })
+    const isLoading = useSelector((state) => {
+        return state.users.isLoading
+    })
     const dispatch = useDispatch()
 
     useEffect(async () => {
         dispatch(getUsers())
     }, [])
+
 
     return (
         <div className="ui segment">
@@ -20,6 +24,7 @@ export default function () {
             <h4> Users and their age</h4>
             <TableComponent
                 headersName={['Username', "Age"]}
+                isLoading={isLoading}
             >
                 {users.map((user, index) => (
                     <tr key={`${user.username}-${index}`}>
@@ -28,6 +33,7 @@ export default function () {
                     </tr>
                 ))}
             </TableComponent>
+
 
         </div>
     )

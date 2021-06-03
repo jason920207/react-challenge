@@ -1,4 +1,5 @@
 import React from 'react'
+import LoaderComponent from '../loaderComponent'
 
 const TableComponent = (props) => (
     <table className="ui celled table">
@@ -9,7 +10,12 @@ const TableComponent = (props) => (
             </tr>
         </thead>
         <tbody>
-            {props.children}
+            {
+                props.isLoading
+                    ? <LoaderComponent />
+                    : props.children
+            }
+
         </tbody>
     </table>
 )

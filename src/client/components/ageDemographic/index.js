@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import TableComponent from '../tableComponent'
-import { getAgeDemographicOfUser, } from "../../redux/actions/users";
+import { getAgeDemographicOfUser, } from "../../redux/actions/ageDemographic";
 
 const selectOptions = ['carrot', 'grapes', 'apple', 'cake', 'crackers', 'chips', 'tv', 'ham', 'beef']
 
@@ -11,9 +11,13 @@ export default function () {
     const ageDemographicOfUser = useSelector((state) => {
         return state.ageDemographic.ageDemographicOfUser
     })
+    const isLoading = useSelector((state) => {
+        return state.ageDemographic.isLoading
+    })
     const dispatch = useDispatch()
 
     const handleOnSelectOption = (e) => {
+        console.log()
         setSelectedOption(e.target.value)
         dispatch(getAgeDemographicOfUser(e.target.value))
     }
@@ -29,18 +33,22 @@ export default function () {
                     ))
                 }
             </select>
-            <TableComponent
-                headersName={['Age', "Count"]}
-            >
-                {
-                    ageDemographicOfUser.map((user, index) => (
-                        <tr key={`${user.age}-${index}`}>
-                            <td>{user.age}</td>
-                            <td>{user.count}</td>
-                        </tr>
-                    ))
-                }
-            </TableComponent>
+            {
+                <TableComponent
+                    headersName={['Age', "Count"]}
+                    isLoading={isLoading}
+                >
+                    {
+                        ageDemographicOfUser.map((user, index) => (
+                            <tr key={`${user.age}-${index}`}>
+                                <td>{user.age}</td>
+                                <td>{user.count}</td>
+                            </tr>
+                        ))
+                    }
+                </TableComponent>
+            }
+
         </div>
     )
 }
