@@ -26,8 +26,11 @@ const getListOfAgesOfUsersWith = (item) => {
         // fill me in :)
         const itemList = {}
         const age = {}
+        const data = []
         const itemsOfUserByUsername = db.itemsOfUserByUsername
         const usersById = db.usersById
+
+        
         for (let user in itemsOfUserByUsername) {
             itemsOfUserByUsername[user].map((item) => {
                 if (!itemList.hasOwnProperty(item)) {
@@ -37,9 +40,9 @@ const getListOfAgesOfUsersWith = (item) => {
             })
 
         }
+
         for (let user in usersById) {
             if (itemList[item].includes(usersById[user].username)) {
-
                 if (age.hasOwnProperty(usersById[user].age)) {
                     age[usersById[user].age] += 1
                 } else {
@@ -48,7 +51,15 @@ const getListOfAgesOfUsersWith = (item) => {
             }
         }
 
-        return age
+        for (let key in age) {
+            const newObj = {}
+            newObj['age'] = key
+            newObj['count'] = age[key]
+            data.push(newObj)
+        }
+
+        return data
+
     }
     return mockDBCall(dataAccessMethod);
 }
