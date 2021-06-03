@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { getUsers, } from "../../redux/actions/users";
 import { useSelector, useDispatch } from 'react-redux'
 import TableComponent from '../tableComponent'
+import LoaderComponent from '../loaderComponent'
+
 
 export default function () {
 
@@ -22,19 +24,19 @@ export default function () {
         <div className="ui segment">
             <h2> All Users</h2>
             <h4> Users and their age</h4>
-            <TableComponent
-                headersName={['Username', "Age"]}
-                isLoading={isLoading}
-            >
-                {users.map((user, index) => (
-                    <tr key={`${user.username}-${index}`}>
-                        <td>{user.username}</td>
-                        <td>{user.age}</td>
-                    </tr>
-                ))}
-            </TableComponent>
-
-
+            {isLoading
+                ? <LoaderComponent />
+                : <TableComponent
+                    headersName={['Username', "Age"]}
+                >
+                    {users.map((user, index) => (
+                        <tr key={`${user.username}-${index}`}>
+                            <td>{user.username}</td>
+                            <td>{user.age}</td>
+                        </tr>
+                    ))}
+                </TableComponent>
+            }
         </div>
     )
 

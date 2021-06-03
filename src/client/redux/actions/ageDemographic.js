@@ -6,12 +6,24 @@ export const GET_AGE_DEMOGRAPHIC_OF_USER_ERROR = 'GET_AGE_DEMOGRAPHIC_OF_USER_ER
 
 const api = "http://localhost:3000";
 
+const fetchingAgeDemographicOfUse = (dispatch) => {
+    dispatch({ type: GET_AGE_DEMOGRAPHIC_OF_USER_FETCHING });
+}
+
+const getAgeDemographicOfUseSuccess = (dispatch, payload) => {
+    dispatch({ type: GET_AGE_DEMOGRAPHIC_OF_USER, payload });
+}
+
+const getAgeDemographicOfUseFail = (dispatch, payload) => {
+    dispatch({ type: GET_AGE_DEMOGRAPHIC_OF_USER_ERROR, payload });
+}
+
 export const getAgeDemographicOfUser = (item) => async (dispatch) => {
     try {
-        dispatch({ type: GET_AGE_DEMOGRAPHIC_OF_USER_FETCHING });
+        fetchingAgeDemographicOfUse(dispatch)
         const resp = await axios.get(`${api}/users/age?item=${item}`);
-        dispatch({ type: GET_AGE_DEMOGRAPHIC_OF_USER, payload: resp.data });
+        getAgeDemographicOfUseSuccess(dispatch, resp.data)
     } catch (error) {
-        dispatch({ type: GET_AGE_DEMOGRAPHIC_OF_USER_ERROR });
+        getAgeDemographicOfUseFail(dispatch, error)
     }
 }

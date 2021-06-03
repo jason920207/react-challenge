@@ -8,13 +8,25 @@ export const GET_AGE_DEMOGRAPHIC_OF_USER_ERROR = 'GET_AGE_DEMOGRAPHIC_OF_USER_ER
 
 const api = "http://localhost:3000";
 
+const fetchingUser = (dispatch) => {
+    dispatch({ type: GET_USERS_FETCHING });
+}
+
+const getUsersSuccess = (dispatch, payload) => {
+    dispatch({ type: GET_USERS, payload });
+}
+
+const getUsersFail = (dispatch, payload) => {
+    dispatch({ type: GET_USERS_ERROR, payload });
+}
+
 export const getUsers = () => async (dispatch) => {
     try {
-        dispatch({ type: GET_USERS_FETCHING });
+        fetchingUser(dispatch)
         const resp = await axios.get(`${api}/users`);
-        dispatch({ type: GET_USERS, payload: resp.data });
+        getUsersSuccess(dispatch, resp.data)
     } catch (error) {
-        dispatch({ type: GET_USERS_ERROR });
+        getUsersFail(dispatch, error)
     }
 };
 

@@ -24,13 +24,18 @@ const getUsers = () => {
 const getListOfAgesOfUsersWith = (item) => {
     const dataAccessMethod = () => {
         // fill me in :)
+
+        if (!item) {
+            return []
+        }
+
         const itemList = {}
         const age = {}
         const data = []
         const itemsOfUserByUsername = db.itemsOfUserByUsername
         const usersById = db.usersById
 
-        
+
         for (let user in itemsOfUserByUsername) {
             itemsOfUserByUsername[user].map((item) => {
                 if (!itemList.hasOwnProperty(item)) {
