@@ -1,29 +1,37 @@
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './src/client/index.js',
+    entry: path.resolve(__dirname, 'src', 'client', 'index.js'),
     output: {
-        path: path.resolve(__dirname, 'public'),
-        filename: 'main.js'
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js',
     },
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.jsx?/,
                 exclude: /node_modules/,
-                use: "babel-loader",
+                use: {
+                    loader: 'babel-loader',
+                },
             },
             {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            }
-        ]
+                test: /\.scss$/,
+                exclude: /node_modules/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
+        ],
     },
-    mode: 'development',
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'public/index.html'
-        })
-    ]
-}
+            template: path.resolve(__dirname, 'public', 'index.html'),
+            favicon: path.resolve(__dirname, 'public', 'favicon.png'),
+        }),
+    ],
+    watch: true,
+    watchOptions: {
+        aggregateTimeout: 200,
+        poll: 1000,
+    },
+};
