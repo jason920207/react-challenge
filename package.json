@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon ./src/index.js",
     "build": "webpack",
+    "dev": "webpack serve"
   },
   "author": "walmex-team",
   "license": "ISC",
