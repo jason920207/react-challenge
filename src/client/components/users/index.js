@@ -13,6 +13,11 @@ export default function () {
     const isLoading = useSelector((state) => {
         return state.users.isLoading
     })
+
+    const error = useSelector((state) => {
+        return state.users.error
+    })
+
     const dispatch = useDispatch()
 
     useEffect(async () => {

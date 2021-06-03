@@ -15,6 +15,10 @@ export default function () {
     const isLoading = useSelector((state) => {
         return state.ageDemographic.isLoading
     })
+    const error = useSelector((state) => {
+        return state.ageDemographic.error
+    })
+
     const dispatch = useDispatch()
 
     const handleOnSelectOption = (e) => {
@@ -33,20 +37,23 @@ export default function () {
                     ))
                 }
             </select>
+
             {
-                <TableComponent
-                    headersName={['Age', "Count"]}
-                    isLoading={isLoading}
-                >
-                    {
-                        ageDemographicOfUser.map((user, index) => (
-                            <tr key={`${user.age}-${index}`}>
-                                <td>{user.age}</td>
-                                <td>{user.count}</td>
-                            </tr>
-                        ))
-                    }
-                </TableComponent>
+                error
+                    ? <span>Loading Error , Please Refresh</span>
+                    : <TableComponent
+                        headersName={['Age', "Count"]}
+                        isLoading={isLoading}
+                    >
+                        {
+                            ageDemographicOfUser.map((user, index) => (
+                                <tr key={`${user.age}-${index}`}>
+                                    <td>{user.age}</td>
+                                    <td>{user.count}</td>
+                                </tr>
+                            ))
+                        }
+                    </TableComponent>
             }
 
         </div>
