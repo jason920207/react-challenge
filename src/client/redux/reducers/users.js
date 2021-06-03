@@ -1,13 +1,13 @@
 import {
   FETCHING,
   GET_USERS,
-  GET_AGE_DEMOGRAPHIC_OF_USER
+  GET_USERS_ERROR
 } from '../actions/users';
 
 const initialState = {
   users: [],
   isLoading: false,
-  
+  usersError: '',
 };
 
 export default function (state = initialState, action) {
@@ -16,8 +16,8 @@ export default function (state = initialState, action) {
       return { ...state, isLoading: true };
     case GET_USERS:
       return { ...state, users: action.payload, isLoading: false };
-    case GET_AGE_DEMOGRAPHIC_OF_USER:
-      return { ...state, users: action.payload, isLoading: false };
+    case GET_USERS_ERROR:
+      return { ...state, usersError: 'fetching users error, try again', isLoading: false };
     default:
       return state;
   }
