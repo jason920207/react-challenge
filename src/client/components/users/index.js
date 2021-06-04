@@ -24,9 +24,14 @@ export default function () {
         dispatch(getUsers())
     }, [])
 
+    if (error) {
+        <section className="ui segment">
+            <h2>Fetching Users Error.....</h2>
+        </section>
+    }
 
     return (
-        <div className="ui segment">
+        <section className="ui segment">
             <h2> All Users</h2>
             <h4> Users and their age</h4>
             {isLoading
@@ -42,7 +47,7 @@ export default function () {
                     ))}
                 </TableComponent>
             }
-        </div>
+        </section>
     )
 
 }

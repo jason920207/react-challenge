@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import TableComponent from '../tableComponent'
 import { getAgeDemographicOfUser, } from "../../redux/actions/ageDemographic";
+import LoaderComponent from '../loaderComponent'
 import _ from 'lodash';
 
 const selectOptions = ['carrot', 'grapes', 'apple', 'cake', 'crackers', 'chips', 'tv', 'ham', 'beef']
@@ -26,8 +27,14 @@ export default function () {
         dispatch(getAgeDemographicOfUser(e.target.value))
     }
 
+    if (error) {
+        <section className="ui segment">
+            <h2>Fetching ageDemographic Error.....</h2>
+        </section>
+    }
+
     return (
-        <div className="ui segment">
+        <section className="ui segment">
             <h2>Age Demographic of Users With {_.capitalize(selectedOption)}</h2>
             <select className="ui dropdown" onChange={handleOnSelectOption} value={selectedOption}>
                 <option value=''></option>
@@ -38,24 +45,23 @@ export default function () {
                 }
             </select>
 
-            {
-                error
-                    ? <span>Loading Error , Please Refresh</span>
-                    : <TableComponent
-                        headersName={['Age', "Count"]}
-                        isLoading={isLoading}
-                    >
-                        {
-                            ageDemographicOfUser.map((user, index) => (
-                                <tr key={`${user.age}-${index}`}>
-                                    <td>{user.age}</td>
-                                    <td>{user.count}</td>
-                                </tr>
-                            ))
-                        }
-                    </TableComponent>
+            {isLoading
+                ? <LoaderComponent />
+                : <TableComponent
+                    headersName={['Age', "Count"]}
+                    isLoading={isLoading}
+                >
+                    {
+                        ageDemographicOfUser.map((user, index) => (
+                            <tr key={`${user.age}-${index}`}>
+                                <td>{user.age}</td>
+                                <td>{user.count}</td>
+                            </tr>
+                        ))
+                    }
+                </TableComponent>
             }
 
-        </div>
+        </section>
     )
 }

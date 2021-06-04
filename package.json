@@ -5,8 +5,7 @@
   "main": "./src/index.js",
   "scripts": {
     "start": "nodemon ./src/index.js",
-    "build": "webpack --mode development",
-    "dev": "webpack serve"
+    "build": "webpack --mode development"
   },
   "author": "walmex-team",
   "license": "ISC",

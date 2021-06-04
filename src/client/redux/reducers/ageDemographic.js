@@ -2,7 +2,7 @@ import {
   GET_AGE_DEMOGRAPHIC_OF_USER_FETCHING,
   GET_AGE_DEMOGRAPHIC_OF_USER,
   GET_AGE_DEMOGRAPHIC_OF_USER_ERROR,
-} from '../actions/users';
+} from '../actions/ageDemographic';
 
 const initialState = {
   isLoading: false,
