@@ -34,4 +34,7 @@ module.exports = {
         aggregateTimeout: 200,
         poll: 1000,
     },
+    devServer: {
+        open: true,
+    },
 };
